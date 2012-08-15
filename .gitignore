@@ -2,7 +2,9 @@
 *.rbc
 .bundle
 .config
+.rake_tasks~
 coverage
+Gemfile.lock
 InstalledFiles
 lib/bundler/man
 pkg
