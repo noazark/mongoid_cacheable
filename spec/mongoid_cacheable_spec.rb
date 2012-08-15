@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Mongoid::Cacheable do
 
-  let(:book) { Book.new(title: 'abcd') }
+  let(:book) { Book.new(title: 'Life') }
 
   context "when uncached" do
 
