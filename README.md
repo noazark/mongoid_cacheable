@@ -3,6 +3,8 @@ mongoid_cacheable
 
 Cache Methods in any Mongoid Document.
 
+[![Build Status](https://secure.travis-ci.org/noazark/mongoid_cacheable.png?branch=master)](http://travis-ci.org/noazark/mongoid_cacheable)
+
 ## Getting Started
 
 ```ruby
