@@ -11,4 +11,9 @@ RSpec::Core::RakeTask.new('spec:progress') do |spec|
   spec.pattern = "spec/**/*_spec.rb"
 end
 
+desc "Open an irb session preloaded with this library"
+task :console do
+  sh "irb -Ilib -rmongoid_cacheable"
+end
+
 task :default => [:spec]
