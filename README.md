@@ -14,21 +14,21 @@ class User
   include Mongoid::Cacheable
 
   field :name
-  cache :characters_in_name, type: Integer
 
-  def characters_in_name
+  def name_length
     name.length
   end
+  cache :name_length, type: Integer
 end
 
 user = User.new(name: 'John')
 
-user.attributes[:characters_in_name]
+user.attributes['_name_length']
   #=> nil
 
-user.characters_in_name
+user.name_length
   #=> 4
 
-user.attributes[:characters_in_name]
+user.attributes['_name_length']
   #=> 4
 ```
