@@ -18,7 +18,7 @@ describe Mongoid::Cacheable do
 
     it "caches method result" do
       book.title_length
-      book.reload.cached_title_length.should eq 4
+      book.cached_title_length.should eq 4
     end
 
   end

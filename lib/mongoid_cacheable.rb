@@ -19,8 +19,8 @@ module Mongoid
 
         define_method(name) do
           unless attributes[field_name]
-            send "#{field_name}=", send(uncached_name)
-            save
+            # cache quitely with atomic set
+            set field_name, send(uncached_name)
           end
 
           attributes[field_name]
