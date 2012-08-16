@@ -10,6 +10,11 @@ describe Mongoid::Cacheable do
     Book.fields
   end
 
+  it "does not persist prematurely" do
+    book.title_length
+    book.new_record?.should be_true
+  end
+
   it "adds a cached field to the document" do
     fields['_title_length'].should_not be_nil
   end
