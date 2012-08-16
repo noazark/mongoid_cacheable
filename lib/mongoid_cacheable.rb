@@ -17,7 +17,14 @@ module Mongoid
         alias_method uncached_name, name
         alias_method cached_name, field_name
 
-        define_method(name) { |*args| attributes[field_name] ||= send(uncached_name) }
+        define_method(name) do
+          unless attributes[field_name]
+            send "#{field_name}=", send(uncached_name)
+            save
+          end
+
+          attributes[field_name]
+        end
       end
     end
   end
