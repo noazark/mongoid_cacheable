@@ -15,16 +15,12 @@ describe Mongoid::Cacheable do
     book.attributes['_abc'].should_not be_nil
   end
 
-  it "does not persist prematurely" do
+  it "does not persist parent prematurely" do
     book.title_length
     book.new_record?.should be_true
   end
 
-  it "adds a cached field to the document" do
-    fields['_title_length'].should_not be_nil
-  end
-
-  context "when uncached" do
+  context "when a method is uncached" do
 
     it "caches method result" do
       book.title_length
@@ -33,7 +29,7 @@ describe Mongoid::Cacheable do
 
   end
 
-  context "when previously cached" do
+  context "when a method has been previously cached" do
 
     before do
       book._title_length = 17
