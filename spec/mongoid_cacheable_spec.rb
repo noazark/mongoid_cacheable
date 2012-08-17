@@ -10,18 +10,18 @@ describe Mongoid::Cacheable do
     Book.fields
   end
 
-  it "caches a method's return" do
+  it "caches a method's result" do
     book.cache_field('_abc') { true }
     book.attributes['_abc'].should_not be_nil
   end
-  
-  it "clears a cache field" do
+
+  it "clears a cache result" do
     book.attributes['_abc'] = true
     book.clear_cache_field('_abc')
     book.attributes['_abc'].should be_nil
   end
 
-  it "does not persist parent prematurely" do
+  it "caches wihtout saving the parent" do
     book.title_length
     book.new_record?.should be_true
   end
