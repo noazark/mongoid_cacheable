@@ -18,14 +18,18 @@ module Mongoid
         alias_method cached_name, field_name
 
         define_method(name) do
-          unless attributes[field_name]
-            # cache quitely with atomic set
-            set field_name, send(uncached_name)
-          end
-
-          attributes[field_name]
+          cache_field(field_name, &method(uncached_name))
         end
       end
+    end
+
+    def cache_field(field_name, &block)
+      unless attributes[field_name]
+        # cache quitely with atomic set
+        set field_name, yield
+      end
+
+      attributes[field_name]
     end
   end
 end
