@@ -4,6 +4,7 @@ mongoid_cacheable
 Cache Methods in any Mongoid Document.
 
 [![Build Status](https://secure.travis-ci.org/noazark/mongoid_cacheable.png?branch=master)](http://travis-ci.org/noazark/mongoid_cacheable)
+[![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/noazark/mongoid_cacheable)
 
 ## Getting Started
 
