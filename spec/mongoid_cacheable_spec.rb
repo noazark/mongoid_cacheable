@@ -2,13 +2,8 @@ require 'spec_helper'
 
 describe Mongoid::Cacheable do
 
-  let(:book) do
-    Book.new(title: 'Life')
-  end
-
-  let(:fields) do
-    Book.fields
-  end
+  let(:book) { Book.new(title: 'Life') }
+  let(:fields) { Book.fields }
 
   it "caches a method's result" do
     book.cache_field('_abc') { true }
