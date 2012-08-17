@@ -11,6 +11,7 @@ module Mongoid
         field_name = "_#{name}"
         uncached_name = "uncached_#{name}"
         cached_name = "cached_#{name}"
+        clear_cached_name = "clear_cached_#{name}"
 
         field field_name, *options
 
@@ -19,6 +20,10 @@ module Mongoid
 
         define_method(name) do
           cache_field(field_name, &method(uncached_name))
+        end
+
+        define_method(clear_cached_name) do
+          cache_field(field_name)
         end
       end
     end
@@ -30,6 +35,10 @@ module Mongoid
       end
 
       attributes[field_name]
+    end
+
+    def clear_cache_field(field_name)
+      unset field_name
     end
   end
 end

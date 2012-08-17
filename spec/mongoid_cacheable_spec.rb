@@ -14,6 +14,12 @@ describe Mongoid::Cacheable do
     book.cache_field('_abc') { true }
     book.attributes['_abc'].should_not be_nil
   end
+  
+  it "clears a cache field" do
+    book.attributes['_abc'] = true
+    book.clear_cache_field('_abc')
+    book.attributes['_abc'].should be_nil
+  end
 
   it "does not persist parent prematurely" do
     book.title_length
