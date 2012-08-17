@@ -17,7 +17,7 @@ describe Mongoid::Cacheable do
   end
 
   it "caches wihtout saving the parent" do
-    book.title_length
+    book.cache_field('_abc') { true }
     book.new_record?.should be_true
   end
 
