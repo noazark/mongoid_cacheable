@@ -11,22 +11,22 @@ end
 
 describe Mongoid::Cacheable do
 
-  let(:book) { Book.new(title: 'Life') }
-  let(:fields) { Book.fields }
+  let(:book) { Book.new }
+
+  before :each do
+    book.cache_field(:_abc) { true }
+  end
 
   it "caches a method's result" do
-    book.cache_field('_abc') { true }
-    book.attributes['_abc'].should_not be_nil
+    book.read_attribute(:_abc).should_not be_nil
   end
 
   it "clears a cache result" do
-    book.attributes['_abc'] = true
-    book.clear_cache_field('_abc')
-    book.attributes['_abc'].should be_nil
+    book.clear_cache_field(:_abc)
+    book.read_attribute(:_abc).should be_nil
   end
 
   it "caches wihtout saving the parent" do
-    book.cache_field('_abc') { true }
     book.new_record?.should be_true
   end
 
