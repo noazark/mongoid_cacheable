@@ -24,14 +24,25 @@ class User
   cache :name_length, type: Integer
 end
 
-user = User.new(name: 'John')
+user = User.new
 
-user.attributes['_name_length']
-  #=> nil
+user.name = 'John'
 
-user.name_length
+# calling the cached method for the first time
+user.cached_name_length
   #=> 4
 
-user.attributes['_name_length']
+user.name = 'Ron Jon'
+
+# the previous result is still cached
+user.cached_name_length
+  #=> 4
+
+# access the original method
+user.name_length
+  #=> 7
+
+# the raw cached field is unchanged
+user.read_attribute :_name_length
   #=> 4
 ```
