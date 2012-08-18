@@ -30,29 +30,32 @@ describe Mongoid::Cacheable do
     book.new_record?.should be_true
   end
 
-  context "when a method is uncached" do
-
-    it "caches method result" do
-      book.title_length
-      book.cached_title_length.should eq 4
-    end
-
+  it "cache is persistant" do
+    book.save
+    book.reload.cache_field(:_abc).should_not be_nil
   end
 
-  context "when a method has been previously cached" do
+  context "when a method is cached" do
 
-    before do
-      book._title_length = 17
+    before :each do
+      book.class.cache :say
+      book.cache_field(:_say) { 'message' }
+    end
+  
+    it "creates a cached method alias" do
+      book.cached_say.should eq 'message'
     end
 
-    it 'returns directly from cache' do
-      book.title_length.should eq 17
+    it "creates an uncached method alias" do
+      # super tricky stuff goin on here, uncached_say may not be properly renamed?
+      book.uncached_say.should eq true
     end
-
-    it 'returns the uncached result' do
-      book.uncached_title_length.should eq 4
+  
+    it "creates a clear cached method alias" do
+      book.clear_cached_say
+      book.cached_say.should be_nil
     end
-
+    
   end
 
 end
