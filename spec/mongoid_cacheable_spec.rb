@@ -18,12 +18,12 @@ describe Mongoid::Cacheable do
   end
 
   it "caches a method's result" do
-    book.read_attribute(:_abc).should_not be_nil
+    book.cached.read_attribute(:_abc).should_not be_nil
   end
 
   it "clears a cache result" do
     book.clear_cache_field(:_abc)
-    book.read_attribute(:_abc).should be_nil
+    book.cached.read_attribute(:_abc).should be_nil
   end
 
   it "caches wihtout saving the parent" do
