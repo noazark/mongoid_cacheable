@@ -46,14 +46,13 @@ describe Mongoid::Cacheable do
       book.cached_say.should eq 'message'
     end
 
-    it "creates an uncached method alias" do
-      # super tricky stuff goin on here, uncached_say may not be properly renamed?
-      book.uncached_say.should eq true
+    it "original method remains uncached" do
+      book.say.should eq true
     end
   
     it "creates a clear cached method alias" do
       book.clear_cached_say
-      book.cached_say.should be_nil
+      book.cached_say.should eq true
     end
     
   end
