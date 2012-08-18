@@ -1,5 +1,14 @@
 require 'spec_helper'
 
+class Book
+  include Mongoid::Document
+  include Mongoid::Cacheable
+
+  def say
+    true
+  end
+end
+
 describe Mongoid::Cacheable do
 
   let(:book) { Book.new(title: 'Life') }
