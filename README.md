@@ -25,24 +25,14 @@ class User
 end
 
 user = User.new
-
 user.name = 'John'
-
-# calling the cached method for the first time
-user.cached_name_length
+user.cached_name_length                   # calling the cached method for the first time
   #=> 4
-
 user.name = 'Ron Jon'
-
-# the previous result is still cached
-user.cached_name_length
+user.cached_name_length                   # the previous result is still cached
   #=> 4
-
-# access the original method
-user.name_length
+user.name_length                          # access the original method
   #=> 7
-
-# the raw cached field is unchanged
-user.read_attribute :_name_length
+user.read_attribute :_name_length         # the raw cached field is unchanged
   #=> 4
 ```
